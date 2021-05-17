@@ -1871,6 +1871,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    lastOrder: Number
+  },
   data: function data() {
     return {
       newStatus: {
@@ -1890,12 +1893,16 @@ __webpack_require__.r(__webpack_exports__);
         return;
       }
 
-      this.newStatus.order = this.$parent.newStatusOrder;
+      this.newStatus.order = this.lastOrder;
       axios.post("/statuses", this.newStatus).then(function (res) {
         // Tell the parent component we've added a new task and include it
         _this.$emit("status-added", res.data);
       })["catch"](function (err) {
         // Handle the error returned from our request
+        console.log(err.response.data);
+        console.log(err);
+        console.log(_this.newStatus);
+
         _this.handleErrors(err);
       });
       this.newStatus = {
@@ -2134,6 +2141,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2159,6 +2179,13 @@ window.Vue.use((vuedraggable__WEBPACK_IMPORTED_MODULE_0___default()));
       return {
         animation: 200,
         group: "task-list",
+        dragClass: "task-drag"
+      };
+    },
+    statusDragOptions: function statusDragOptions() {
+      return {
+        animation: 200,
+        group: "status-list",
         dragClass: "status-drag"
       };
     }
@@ -2196,6 +2223,13 @@ window.Vue.use((vuedraggable__WEBPACK_IMPORTED_MODULE_0___default()));
       // Add newly created task to our column
       newStatus.tasks = [];
       this.statuses.push(newStatus);
+    },
+    handleStatusMoved: function handleStatusMoved(evt) {
+      axios.put("/statuses/sync", {
+        columns: this.statuses
+      })["catch"](function (err) {
+        console.log(err.response);
+      });
     }
   }
 });
@@ -2531,7 +2565,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.status-drag[data-v-12d93558] {\n    transition: transform 0.5s;\n    transition-property: all;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.task-drag[data-v-12d93558] {\n    transition: transform 0.5s;\n    transition-property: all;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -35684,175 +35718,232 @@ var render = function() {
     "div",
     { staticClass: "relative p-2 flex overflow-x-auto h-full" },
     [
-      _vm._l(_vm.statuses, function(status) {
-        return _c(
-          "div",
-          { key: status.id, staticClass: "mr-6 w-4/5 max-w-xs flex-shrink-0" },
-          [
-            _c("div", { staticClass: "rounded-md shadow-md overflow-hidden" }, [
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "p-3 flex justify-between items-baseline bg-blue-900"
-                },
-                [
-                  _c("h4", { staticClass: "font-medium text-white" }, [
-                    _vm._v(
-                      "\n                    " +
-                        _vm._s(status.title) +
-                        "\n                "
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass:
-                        "py-1 px-2 text-sm text-white hover:underline",
-                      on: {
-                        click: function($event) {
-                          return _vm.openAddTaskForm(status.id)
-                        }
-                      }
-                    },
-                    [_vm._v("\n                    Add Task\n                ")]
-                  )
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "p-2 bg-gray-100" },
-                [
-                  _vm.newTaskForStatus === status.id
-                    ? _c("AddTaskForm", {
-                        attrs: { "status-id": status.id },
-                        on: {
-                          "task-added": _vm.handleTaskAdded,
-                          "task-canceled": _vm.closeAddTaskForm
-                        }
-                      })
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _c(
-                    "draggable",
-                    _vm._b(
-                      {
-                        staticClass: "flex-1 overflow-hidden",
-                        on: { end: _vm.handleTaskMoved },
-                        model: {
-                          value: status.tasks,
-                          callback: function($$v) {
-                            _vm.$set(status, "tasks", $$v)
+      _c(
+        "draggable",
+        _vm._b(
+          {
+            staticClass: "flex-1",
+            attrs: { handle: ".status-drag-item" },
+            on: { end: _vm.handleStatusMoved },
+            model: {
+              value: _vm.statuses,
+              callback: function($$v) {
+                _vm.statuses = $$v
+              },
+              expression: "statuses"
+            }
+          },
+          "draggable",
+          _vm.statusDragOptions,
+          false
+        ),
+        [
+          _c(
+            "transition-group",
+            {
+              staticClass: "flex-1 flex  h-full rounded shadow-xs",
+              attrs: { name: "statuses", tag: "div" }
+            },
+            [
+              _vm._l(_vm.statuses, function(status) {
+                return _c(
+                  "div",
+                  {
+                    key: status.id,
+                    staticClass:
+                      "mr-6 w-4/5 max-w-xs flex-shrink-0 status-drag-item"
+                  },
+                  [
+                    _c(
+                      "div",
+                      { staticClass: "rounded-md shadow-md overflow-hidden" },
+                      [
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "p-3 flex justify-between items-baseline bg-blue-900"
                           },
-                          expression: "status.tasks"
-                        }
-                      },
-                      "draggable",
-                      _vm.taskDragOptions,
-                      false
-                    ),
-                    [
-                      _c(
-                        "transition-group",
-                        {
-                          staticClass:
-                            "flex-1 flex flex-col h-full overflow-x-hidden overflow-y-auto rounded shadow-xs",
-                          attrs: { tag: "div" }
-                        },
-                        _vm._l(status.tasks, function(task) {
-                          return _c(
-                            "div",
-                            {
-                              key: task.id,
-                              staticClass:
-                                "mb-3 p-4 flex flex-col bg-white rounded-md shadow transform hover:shadow-md cursor-pointer"
-                            },
-                            [
-                              _c(
-                                "span",
-                                {
-                                  staticClass:
-                                    "block mb-2 text-xl text-gray-900"
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                              " +
-                                      _vm._s(task.title) +
-                                      "\n                            "
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c("p", { staticClass: "text-gray-700" }, [
+                          [
+                            _c(
+                              "h4",
+                              { staticClass: "font-medium text-white" },
+                              [
                                 _vm._v(
-                                  "\n                                " +
-                                    _vm._s(task.description) +
-                                    "\n                            "
+                                  "\n                            " +
+                                    _vm._s(status.title) +
+                                    "\n                        "
                                 )
-                              ])
-                            ]
-                          )
-                        }),
-                        0
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      directives: [
-                        {
-                          name: "show",
-                          rawName: "v-show",
-                          value:
-                            !status.tasks.length &&
-                            _vm.newTaskForStatus !== status.id,
-                          expression:
-                            "!status.tasks.length && newTaskForStatus !== status.id"
-                        }
-                      ],
-                      staticClass:
-                        "flex-1 p-4 flex flex-col items-center justify-center"
-                    },
-                    [
-                      _c("span", { staticClass: "text-gray-600" }, [
-                        _vm._v("No tasks yet")
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass:
-                            "mt-1 text-sm text-blue-500 mt-2 hover:underline",
-                          on: {
-                            click: function($event) {
-                              return _vm.openAddTaskForm(status.id)
-                            }
-                          }
-                        },
-                        [
-                          _vm._v(
-                            "\n                        Add one\n                    "
-                          )
-                        ]
-                      )
-                    ]
-                  )
-                ],
-                1
-              )
-            ])
-          ]
-        )
-      }),
-      _vm._v(" "),
-      _c("AddStatusForm", { on: { "status-added": _vm.handleStatusAdded } })
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "button",
+                              {
+                                staticClass:
+                                  "py-1 px-2 text-sm text-white hover:underline",
+                                on: {
+                                  click: function($event) {
+                                    return _vm.openAddTaskForm(status.id)
+                                  }
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                            Add Task\n                        "
+                                )
+                              ]
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "p-2 bg-gray-100" },
+                          [
+                            _vm.newTaskForStatus === status.id
+                              ? _c("AddTaskForm", {
+                                  attrs: { "status-id": status.id },
+                                  on: {
+                                    "task-added": _vm.handleTaskAdded,
+                                    "task-canceled": _vm.closeAddTaskForm
+                                  }
+                                })
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _c(
+                              "draggable",
+                              _vm._b(
+                                {
+                                  staticClass: "flex-1 overflow-hidden",
+                                  on: { end: _vm.handleTaskMoved },
+                                  model: {
+                                    value: status.tasks,
+                                    callback: function($$v) {
+                                      _vm.$set(status, "tasks", $$v)
+                                    },
+                                    expression: "status.tasks"
+                                  }
+                                },
+                                "draggable",
+                                _vm.taskDragOptions,
+                                false
+                              ),
+                              [
+                                _c(
+                                  "transition-group",
+                                  {
+                                    staticClass:
+                                      "flex-1 flex flex-col h-full overflow-x-hidden overflow-y-auto rounded shadow-xs",
+                                    attrs: { tag: "div" }
+                                  },
+                                  _vm._l(status.tasks, function(task) {
+                                    return _c(
+                                      "div",
+                                      {
+                                        key: task.id,
+                                        staticClass:
+                                          "mb-3 p-4 flex flex-col bg-white rounded-md shadow transform hover:shadow-md cursor-pointer"
+                                      },
+                                      [
+                                        _c(
+                                          "span",
+                                          {
+                                            staticClass:
+                                              "block mb-2 text-xl text-gray-900"
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n                                      " +
+                                                _vm._s(task.title) +
+                                                "\n                                    "
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "p",
+                                          { staticClass: "text-gray-700" },
+                                          [
+                                            _vm._v(
+                                              "\n                                        " +
+                                                _vm._s(task.description) +
+                                                "\n                                    "
+                                            )
+                                          ]
+                                        )
+                                      ]
+                                    )
+                                  }),
+                                  0
+                                )
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                directives: [
+                                  {
+                                    name: "show",
+                                    rawName: "v-show",
+                                    value:
+                                      !status.tasks.length &&
+                                      _vm.newTaskForStatus !== status.id,
+                                    expression:
+                                      "!status.tasks.length && newTaskForStatus !== status.id"
+                                  }
+                                ],
+                                staticClass:
+                                  "flex-1 p-4 flex flex-col items-center justify-center"
+                              },
+                              [
+                                _c("span", { staticClass: "text-gray-600" }, [
+                                  _vm._v("No tasks yet")
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "mt-1 text-sm text-blue-500 mt-2 hover:underline",
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.openAddTaskForm(status.id)
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                Add one\n                            "
+                                    )
+                                  ]
+                                )
+                              ]
+                            )
+                          ],
+                          1
+                        )
+                      ]
+                    )
+                  ]
+                )
+              }),
+              _vm._v(" "),
+              _c("AddStatusForm", {
+                key: 0,
+                attrs: { "last-order": this.newStatusOrder },
+                on: { "status-added": _vm.handleStatusAdded }
+              })
+            ],
+            2
+          )
+        ],
+        1
+      )
     ],
-    2
+    1
   )
 }
 var staticRenderFns = []
