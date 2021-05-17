@@ -29,7 +29,6 @@ export default {
         return {
             newStatus: {
                 title: "",
-                slug: "",
                 order: 0,
             },
             errorMessage: ""
@@ -43,7 +42,6 @@ export default {
                 return;
             }
 
-            this.newStatus.slug = this.newStatus.title.toLowerCase().replace(" ", "-");
             this.newStatus.order = this.$parent.newStatusOrder;
 
             axios
@@ -59,7 +57,6 @@ export default {
 
             this.newStatus = {
                 title: "",
-                slug: "",
                 order: 0,
             };
         },

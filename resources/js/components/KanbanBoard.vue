@@ -3,7 +3,7 @@
         <!-- Columns (Statuses) -->
         <div
             v-for="status in statuses"
-            :key="status.slug"
+            :key="status.id"
             class="mr-6 w-4/5 max-w-xs flex-shrink-0"
         >
             <div class="rounded-md shadow-md overflow-hidden">

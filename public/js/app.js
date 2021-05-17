@@ -1875,7 +1875,6 @@ __webpack_require__.r(__webpack_exports__);
     return {
       newStatus: {
         title: "",
-        slug: "",
         order: 0
       },
       errorMessage: ""
@@ -1891,7 +1890,6 @@ __webpack_require__.r(__webpack_exports__);
         return;
       }
 
-      this.newStatus.slug = this.newStatus.title.toLowerCase().replace(" ", "-");
       this.newStatus.order = this.$parent.newStatusOrder;
       axios.post("/statuses", this.newStatus).then(function (res) {
         // Tell the parent component we've added a new task and include it
@@ -1902,7 +1900,6 @@ __webpack_require__.r(__webpack_exports__);
       });
       this.newStatus = {
         title: "",
-        slug: "",
         order: 0
       };
     },
@@ -24011,10 +24008,7 @@ var render = function() {
       _vm._l(_vm.statuses, function(status) {
         return _c(
           "div",
-          {
-            key: status.slug,
-            staticClass: "mr-6 w-4/5 max-w-xs flex-shrink-0"
-          },
+          { key: status.id, staticClass: "mr-6 w-4/5 max-w-xs flex-shrink-0" },
           [
             _c("div", { staticClass: "rounded-md shadow-md overflow-hidden" }, [
               _c(

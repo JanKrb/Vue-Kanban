@@ -10,7 +10,6 @@ class StatusController extends Controller
     {
         $this->validate($request, [
             'title' => ['required', 'string', 'max:56'],
-            'slug' => ['string'],
             'order' => ['required', 'integer']
         ]);
 
