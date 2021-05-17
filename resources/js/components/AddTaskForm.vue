@@ -17,9 +17,9 @@
                 v-model.trim="newTask.description"
             ></textarea>
             <div v-show="errorMessage">
-        <span class="text-xs text-red-500">
-          {{ errorMessage }}
-        </span>
+                <span class="text-xs text-red-500">
+                  {{ errorMessage }}
+                </span>
             </div>
         </div>
         <div class="p-3 flex justify-between items-end text-sm bg-gray-100">
