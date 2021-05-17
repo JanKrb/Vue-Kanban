@@ -25,6 +25,9 @@
 
 <script>
 export default {
+    props: {
+        lastOrder: Number
+    },
     data() {
         return {
             newStatus: {
@@ -42,7 +45,7 @@ export default {
                 return;
             }
 
-            this.newStatus.order = this.$parent.newStatusOrder;
+            this.newStatus.order = this.lastOrder;
 
             axios
                 .post("/statuses", this.newStatus)

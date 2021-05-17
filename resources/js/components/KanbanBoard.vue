@@ -76,7 +76,7 @@
         <!-- ./Columns -->
 
         <!-- AddStatusForm -->
-        <AddStatusForm v-on:status-added="handleStatusAdded"></AddStatusForm>
+                <AddStatusForm v-on:status-added="handleStatusAdded" :key="0" :last-order="this.newStatusOrder"></AddStatusForm>
         <!-- ./AddStatusForm -->
     </div>
 </template>
