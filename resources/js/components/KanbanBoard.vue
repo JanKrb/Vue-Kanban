@@ -96,10 +96,113 @@
         </div>
 
         <ModalComponent :open="showDetailModal" @close="showDetailModal = false">
-            <div class="w-full bg-white rounded-lg shadow-2xl px-6 py-6">
-                <h2 class="font-semibold text-gray-900 text-2xl leading-tight border-b-2 border-gray-200 pb-4">{{ this.showDetailModalTask.title }}</h2>
+            <div class="lg:flex">
+                <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style="background-image: url('https://tailwindcss.com/img/card-left.jpg')" title="Woman holding a mug">
+                </div>
+                <div class="p-4 flex flex-col justify-between leading-normal bg-white">
+                    <div class="mb-8">
+                        <t-dropdown>
+                            <div
+                                slot="trigger"
+                                slot-scope="{
+                                  mousedownHandler,
+                                  focusHandler,
+                                  blurHandler,
+                                  keydownHandler,
+                                  isShown
+                                }"
+                            >
+                                <p class="text-sm text-grey-dark flex items-center select-none"
+                                   :class="{ isShown }"
+                                   @mousedown="mousedownHandler"
+                                   @focus="focusHandler"
+                                   @blur="blurHandler"
+                                   @keydown="keydownHandler">
+                                    <i class="fas fa-bars mr-3"></i>
+                                    Board - Liste
+                                </p>
+                            </div>
 
-                <p class="mt-4 text-gray-700">{{ this.showDetailModalTask.description}}</p>
+                            <div slot-scope="{ hide, blurHandler }">
+                                <button
+                                    class="block w-full px-4 py-2 text-sm leading-5 text-black transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                    @click="hide"
+                                >
+                                    Members
+                                </button>
+
+                                <button
+                                    class="block w-full px-4 py-2 text-sm leading-5 text-black transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                    @click="hide"
+                                >
+                                    Labels
+                                </button>
+
+                                <button
+                                    class="block w-full px-4 py-2 text-sm leading-5 text-black transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                    @click="hide"
+                                >
+                                    Deadline
+                                </button>
+
+                                <button
+                                    class="block w-full px-4 py-2 text-sm leading-5 text-black transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                    @click="hide"
+                                >
+                                    Attachments
+                                </button>
+
+                                <button
+                                    class="block w-full px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out border-t hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                    role="menuitem"
+                                    @blur="blurHandler"
+                                >
+                                    Move
+                                </button>
+
+                                <button
+                                    class="block w-full px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                    role="menuitem"
+                                    @blur="blurHandler"
+                                >
+                                    Copy
+                                </button>
+
+                                <button
+                                    class="block w-full px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                    role="menuitem"
+                                    @blur="blurHandler"
+                                >
+                                    Share
+                                </button>
+
+                                <button
+                                    class="block w-full px-4 py-2 text-sm leading-5 text-yellow-500 transition duration-150 ease-in-out border-t hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                    @click="hide"
+                                >
+                                    Archive
+                                </button>
+
+                                <button
+                                    class="block w-full px-4 py-2 text-sm leading-5 text-red-500 transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                    @click="hide"
+                                >
+                                    Delete
+                                </button>
+                            </div>
+                        </t-dropdown>
+
+                        <div class="text-black font-bold text-xl mb-2">Titelzeile</div>
+                        <p class="text-grey-darker text-base">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.</p>
+                    </div>
+                    <div class="flex items-center">
+                        <img class="w-10 h-10 rounded-full mr-4" src="https://pbs.twimg.com/profile_images/885868801232961537/b1F6H4KC_400x400.jpg" alt="Avatar of Jonathan Reinink">
+                        <div class="text-sm">
+                            <p class="text-black leading-none">Jan Ruhfus</p>
+                            <p class="text-grey-dark">May 17</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </ModalComponent>
     </div>
