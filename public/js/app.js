@@ -1899,10 +1899,6 @@ __webpack_require__.r(__webpack_exports__);
         _this.$emit("status-added", res.data);
       })["catch"](function (err) {
         // Handle the error returned from our request
-        console.log(err.response.data);
-        console.log(err);
-        console.log(_this.newStatus);
-
         _this.handleErrors(err);
       });
       this.newStatus = {
