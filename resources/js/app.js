@@ -43,6 +43,14 @@ const settings = {
             classes: 'border-2 block w-full rounded text-gray-800'
         }
     },
+    't-button': {
+        component: TButton,
+        props: {}
+    },
+    't-dropdown': {
+        component: TDropdown,
+        props: {}
+    }
 }
 
 Vue.use(VueTailwind, settings)

@@ -2162,6 +2162,109 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2396,6 +2499,14 @@ var settings = {
     props: {
       classes: 'border-2 block w-full rounded text-gray-800'
     }
+  },
+  't-button': {
+    component: vue_tailwind_dist_components__WEBPACK_IMPORTED_MODULE_1__.TButton,
+    props: {}
+  },
+  't-dropdown': {
+    component: vue_tailwind_dist_components__WEBPACK_IMPORTED_MODULE_1__.TDropdown,
+    props: {}
   }
 };
 vue__WEBPACK_IMPORTED_MODULE_2__.default.use((vue_tailwind__WEBPACK_IMPORTED_MODULE_0___default()), settings);
@@ -36173,24 +36284,240 @@ var render = function() {
           }
         },
         [
-          _c(
-            "div",
-            { staticClass: "w-full bg-white rounded-lg shadow-2xl px-6 py-6" },
-            [
-              _c(
-                "h2",
-                {
-                  staticClass:
-                    "font-semibold text-gray-900 text-2xl leading-tight border-b-2 border-gray-200 pb-4"
-                },
-                [_vm._v(_vm._s(this.showDetailModalTask.title))]
-              ),
-              _vm._v(" "),
-              _c("p", { staticClass: "mt-4 text-gray-700" }, [
-                _vm._v(_vm._s(this.showDetailModalTask.description))
-              ])
-            ]
-          )
+          _c("div", { staticClass: "lg:flex" }, [
+            _c("div", {
+              staticClass:
+                "h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden",
+              staticStyle: {
+                "background-image":
+                  "url('https://tailwindcss.com/img/card-left.jpg')"
+              },
+              attrs: { title: "Woman holding a mug" }
+            }),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "p-4 flex flex-col justify-between leading-normal bg-white"
+              },
+              [
+                _c(
+                  "div",
+                  { staticClass: "mb-8" },
+                  [
+                    _c("t-dropdown", {
+                      scopedSlots: _vm._u([
+                        {
+                          key: "trigger",
+                          fn: function(ref) {
+                            var mousedownHandler = ref.mousedownHandler
+                            var focusHandler = ref.focusHandler
+                            var blurHandler = ref.blurHandler
+                            var keydownHandler = ref.keydownHandler
+                            var isShown = ref.isShown
+                            return _c("div", {}, [
+                              _c(
+                                "p",
+                                {
+                                  staticClass:
+                                    "text-sm text-grey-dark flex items-center select-none",
+                                  class: { isShown: isShown },
+                                  on: {
+                                    mousedown: mousedownHandler,
+                                    focus: focusHandler,
+                                    blur: blurHandler,
+                                    keydown: keydownHandler
+                                  }
+                                },
+                                [
+                                  _c("i", { staticClass: "fas fa-bars mr-3" }),
+                                  _vm._v(
+                                    "\n                                Board - Liste\n                            "
+                                  )
+                                ]
+                              )
+                            ])
+                          }
+                        },
+                        {
+                          key: "default",
+                          fn: function(ref) {
+                            var hide = ref.hide
+                            var blurHandler = ref.blurHandler
+                            return _c("div", {}, [
+                              _c(
+                                "button",
+                                {
+                                  staticClass:
+                                    "block w-full px-4 py-2 text-sm leading-5 text-black transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-none focus:bg-gray-100",
+                                  on: { click: hide }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                Members\n                            "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass:
+                                    "block w-full px-4 py-2 text-sm leading-5 text-black transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-none focus:bg-gray-100",
+                                  on: { click: hide }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                Labels\n                            "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass:
+                                    "block w-full px-4 py-2 text-sm leading-5 text-black transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-none focus:bg-gray-100",
+                                  on: { click: hide }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                Deadline\n                            "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass:
+                                    "block w-full px-4 py-2 text-sm leading-5 text-black transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-none focus:bg-gray-100",
+                                  on: { click: hide }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                Attachments\n                            "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass:
+                                    "block w-full px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out border-t hover:bg-gray-100 focus:outline-none focus:bg-gray-100",
+                                  attrs: { role: "menuitem" },
+                                  on: { blur: blurHandler }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                Move\n                            "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass:
+                                    "block w-full px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-none focus:bg-gray-100",
+                                  attrs: { role: "menuitem" },
+                                  on: { blur: blurHandler }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                Copy\n                            "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass:
+                                    "block w-full px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-none focus:bg-gray-100",
+                                  attrs: { role: "menuitem" },
+                                  on: { blur: blurHandler }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                Share\n                            "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass:
+                                    "block w-full px-4 py-2 text-sm leading-5 text-yellow-500 transition duration-150 ease-in-out border-t hover:bg-gray-100 focus:outline-none focus:bg-gray-100",
+                                  on: { click: hide }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                Archive\n                            "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass:
+                                    "block w-full px-4 py-2 text-sm leading-5 text-red-500 transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-none focus:bg-gray-100",
+                                  on: { click: hide }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                Delete\n                            "
+                                  )
+                                ]
+                              )
+                            ])
+                          }
+                        }
+                      ])
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "text-black font-bold text-xl mb-2" },
+                      [_vm._v("Titelzeile")]
+                    ),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "text-grey-darker text-base" }, [
+                      _vm._v(
+                        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil."
+                      )
+                    ])
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex items-center" }, [
+                  _c("img", {
+                    staticClass: "w-10 h-10 rounded-full mr-4",
+                    attrs: {
+                      src:
+                        "https://pbs.twimg.com/profile_images/885868801232961537/b1F6H4KC_400x400.jpg",
+                      alt: "Avatar of Jonathan Reinink"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "text-sm" }, [
+                    _c("p", { staticClass: "text-black leading-none" }, [
+                      _vm._v("Jan Ruhfus")
+                    ]),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "text-grey-dark" }, [
+                      _vm._v("May 17")
+                    ])
+                  ])
+                ])
+              ]
+            )
+          ])
         ]
       )
     ],
