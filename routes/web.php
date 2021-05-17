@@ -32,4 +32,5 @@ Route::group(['middleware' => 'auth'], function () {
 Route::group(['middleware' => 'auth'], function () {
     Route::post('statuses', 'App\Http\Controllers\StatusController@store')->name('statuses.store');
     Route::put('statuses', 'App\Http\Controllers\StatusController@update')->name('statuses.update');
+    Route::put('statuses/sync', 'App\Http\Controllers\StatusController@sync')->name('statuses.sync');
 });
