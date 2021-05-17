@@ -28,6 +28,7 @@
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.15.3",
         "@tailwindcss/forms": "^0.3.2",
+        "@tailwindcss/typography": "^0.4.0",
         "font-awesome": "^4.7.0",
         "vue": "^2.6.12",
         "vue-tailwind": "^2.2.1",
