@@ -119,7 +119,7 @@
                                    @blur="blurHandler"
                                    @keydown="keydownHandler">
                                     <i class="fas fa-bars mr-3"></i>
-                                    Board - Liste
+                                    {{ this.showDetailModalTask.board.title + " - " + this.showDetailModalTask.title }}
                                 </p>
                             </div>
 
@@ -192,14 +192,14 @@
                             </div>
                         </t-dropdown>
 
-                        <div class="text-black font-bold text-xl mb-2">Titelzeile</div>
-                        <p class="text-grey-darker text-base">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.</p>
+                        <div class="text-black font-bold text-xl mb-2">{{ this.showDetailModalTask.title }}</div>
+                        <p class="text-grey-darker text-base">{{ this.showDetailModalTask.description }}</p>
                     </div>
                     <div class="flex items-center">
-                        <img class="w-10 h-10 rounded-full mr-4" src="https://pbs.twimg.com/profile_images/885868801232961537/b1F6H4KC_400x400.jpg" alt="Avatar of Jonathan Reinink">
+                        <img class="w-10 h-10 rounded-full mr-4" :src="this.showDetailModalTask.creator.picture" :alt="'Avatar of ' + this.showDetailModalTask.creator.name">
                         <div class="text-sm">
-                            <p class="text-black leading-none">Jan Ruhfus</p>
-                            <p class="text-grey-dark">May 17</p>
+                            <p class="text-black leading-none" >{{ this.showDetailModalTask.creator.name }}</p>
+                            <p class="text-grey-dark"><format :value="this.showDetailModalTask.updated_at" fn="full_beauty" /></p>
                         </div>
                     </div>
                 </div>
@@ -213,6 +213,7 @@ import draggable from "vuedraggable";
 import AddTaskForm from "./AddTaskForm";
 import AddStatusForm from "./AddStatusForm";
 import ModalComponent from "./ModalComponent";
+import moment from "moment";
 
 window.Vue.use(draggable);
 
@@ -229,7 +230,25 @@ export default {
             newStatusOrder: 0,
 
             showDetailModal: false,
-            showDetailModalTask: {}
+            showDetailModalTask: {
+                title: '',
+                description: '',
+                created_at: '1970-01-01T00:00:00.000000Z',
+                updated_at: '1970-01-01T00:00:00.000000Z',
+
+                board: {
+                    title: '',
+                    creator: {
+                        name: '',
+                        picture: ''
+                    }
+                },
+
+                creator: {
+                    name: 'Jan Ruhfus',
+                    picture: 'https://i.imgur.com/DY3Th0n.png'
+                }
+            }
         };
     },
     computed: {
@@ -252,6 +271,8 @@ export default {
         // 'clone' the statuses so we don't alter the prop when making changes
         this.statuses = JSON.parse(JSON.stringify(this.initialData));
         this.newStatusOrder = this.statuses[this.statuses.length - 1].order + 1;
+
+        console.log(this.showDetailModalTask.created_at)
     },
     methods: {
         openAddTaskForm(statusId) {
@@ -288,8 +309,21 @@ export default {
             });
         },
         showTaskModel(task) {
-            this.showDetailModal = true;
             this.showDetailModalTask = task;
+            this.showDetailModalTask.board = {
+                title: 'Laravel',
+                creator: {
+                    name: 'Jan Ruhfus',
+                    picture: 'https://i.imgur.com/DY3Th0n.png'
+                }
+            }
+            this.showDetailModalTask.creator = {
+                name: 'Jan Ruhfus',
+                picture: 'https://i.imgur.com/DY3Th0n.png'
+            }
+
+            console.log(this.showDetailModalTask)
+            this.showDetailModal = true;
         }
     }
 };

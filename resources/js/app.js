@@ -2,7 +2,7 @@ require("./bootstrap");
 
 import Vue from 'vue';
 import VueTailwind from 'vue-tailwind'
-
+import moment from "moment";
 import {
     TInput,
     TTextarea,
@@ -54,6 +54,34 @@ const settings = {
 }
 
 Vue.use(VueTailwind, settings)
+
+var formatter = {
+    date: function (value, format) {
+        if (value) {
+            return moment(String(value)).format(format || 'MM/DD/YY')
+        }
+    },
+    time: function (value, format) {
+        if (value) {
+            return moment(String(value)).format(format || 'h:mm A');
+        }
+    },
+    full_beauty: function (value, format) {
+        if (value) {
+            return moment(String(value)).format(format || 'MMM Do YYYY - hh:mm')
+        }
+    }
+};
+
+Vue.component('format', {
+    template: `<span>{{ formatter[fn](value, format) }}</span>`,
+    props: ['value', 'fn', 'format'],
+    computed: {
+        formatter() {
+            return formatter;
+        }
+    }
+});
 
 const app = new Vue({
     el: "#app"
