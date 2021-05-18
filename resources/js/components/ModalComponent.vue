@@ -1,39 +1,37 @@
 <template>
-    <portal to="modals">
-        <div v-if="showModal" class="fixed inset-0 items-center justify-center">
-            <transition
-                @before-leave="backdropLeaving = true"
-                @after-leave="backdropLeaving = false"
-                enter-active-class="transition-all transition-fast ease-out-quad"
-                leave-active-class="transition-all transition-medium ease-in-quad"
-                enter-class="opacity-0"
-                enter-to-class="opacity-100"
-                leave-class="opacity-100"
-                leave-to-class="opacity-0"
-                appear
-            >
-                <div v-if="showBackdrop">
-                    <div class="absolute inset-0 bg-black opacity-25" @click="close"></div>
-                </div>
-            </transition>
+    <div v-if="showModal" class="fixed inset-0 items-center justify-center">
+        <transition
+            @before-leave="backdropLeaving = true"
+            @after-leave="backdropLeaving = false"
+            enter-active-class="transition-all transition-fast ease-out-quad"
+            leave-active-class="transition-all transition-medium ease-in-quad"
+            enter-class="opacity-0"
+            enter-to-class="opacity-100"
+            leave-class="opacity-100"
+            leave-to-class="opacity-0"
+            appear
+        >
+            <div v-if="showBackdrop">
+                <div class="absolute inset-0 bg-black opacity-25" @click="close"></div>
+            </div>
+        </transition>
 
-            <transition
-                @before-leave="cardLeaving = true"
-                @after-leave="cardLeaving = false"
-                enter-active-class="transition-all transition-fast ease-out-quad"
-                leave-active-class="transition-all transition-medium ease-in-quad"
-                enter-class="opacity-0 scale-70"
-                enter-to-class="opacity-100 scale-100"
-                leave-class="opacity-100 scale-100"
-                leave-to-class="opacity-0 scale-70"
-                appear
-            >
-                <div v-if="showContent" class="relative m-80">
-                    <slot></slot>
-                </div>
-            </transition>
-        </div>
-    </portal>
+        <transition
+            @before-leave="cardLeaving = true"
+            @after-leave="cardLeaving = false"
+            enter-active-class="transition-all transition-fast ease-out-quad"
+            leave-active-class="transition-all transition-medium ease-in-quad"
+            enter-class="opacity-0 scale-70"
+            enter-to-class="opacity-100 scale-100"
+            leave-class="opacity-100 scale-100"
+            leave-to-class="opacity-0 scale-70"
+            appear
+        >
+            <div v-if="showContent" class="relative m-80">
+                <slot></slot>
+            </div>
+        </transition>
+    </div>
 </template>
 
 <script>
