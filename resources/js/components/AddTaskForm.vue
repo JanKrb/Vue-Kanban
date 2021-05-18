@@ -28,11 +28,11 @@
                 type="reset"
                 class="py-1 leading-5 text-gray-600 hover:text-gray-700"
             >
-                cancel
+                Cancel
             </button>
             <button
                 type="submit"
-                class="px-3 py-1 leading-5 text-white bg-orange-600 hover:bg-orange-500 rounded"
+                class="px-3 py-1 leading-5 text-blue-800 bg-orange-600 hover:bg-orange-500 rounded"
             >
                 Add
             </button>
