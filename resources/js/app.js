@@ -28,6 +28,7 @@ import {
 
 window.Vue = Vue;
 
+Vue.component("board-overview", require("./components/BoardOVComponent.vue").default);
 Vue.component("kanban-board", require("./components/KanbanBoard.vue").default);
 
 const settings = {

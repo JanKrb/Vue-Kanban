@@ -1872,13 +1872,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
-    lastOrder: Number
+    lastOrder: Number,
+    boardId: Number
   },
   data: function data() {
     return {
       newStatus: {
         title: "",
-        order: 0
+        order: 0,
+        board_id: this.boardId
       },
       errorMessage: ""
     };
@@ -1894,7 +1896,7 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       this.newStatus.order = this.lastOrder;
-      axios.post("/statuses", this.newStatus).then(function (res) {
+      axios.post("".concat(this.boardId, "/statuses"), this.newStatus).then(function (res) {
         // Tell the parent component we've added a new task and include it
         _this.$emit("status-added", res.data);
       })["catch"](function (err) {
@@ -1983,14 +1985,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
-    statusId: Number
+    statusId: Number,
+    boardId: Number
   },
   data: function data() {
     return {
       newTask: {
         title: "",
         description: "",
-        status_id: null
+        status_id: null,
+        board_id: this.boardId
       },
       errorMessage: ""
     };
@@ -2009,7 +2013,7 @@ __webpack_require__.r(__webpack_exports__);
       } // Send new task to server
 
 
-      axios.post("/tasks", this.newTask).then(function (res) {
+      axios.post("".concat(this.boardId, "/tasks"), this.newTask).then(function (res) {
         // Tell the parent component we've added a new task and include it
         _this.$emit("task-added", res.data);
       })["catch"](function (err) {
@@ -2035,6 +2039,73 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/BoardOVComponent.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/BoardOVComponent.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _ModalComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ModalComponent */ "./resources/js/components/ModalComponent.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  components: {
+    ModalComponent: _ModalComponent__WEBPACK_IMPORTED_MODULE_0__.default
+  },
+  props: {
+    initialData: Array
+  },
+  data: function data() {
+    return {
+      boards: []
+    };
+  },
+  computed: {},
+  mounted: function mounted() {
+    this.boards = JSON.parse(JSON.stringify(this.initialData));
+  },
+  methods: {}
 });
 
 /***/ }),
@@ -2267,6 +2338,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -2281,7 +2353,8 @@ window.Vue.use((vuedraggable__WEBPACK_IMPORTED_MODULE_0___default()));
     ModalComponent: _ModalComponent__WEBPACK_IMPORTED_MODULE_3__.default
   },
   props: {
-    initialData: Array
+    initialData: Array,
+    boardId: Number
   },
   data: function data() {
     return {
@@ -2328,7 +2401,6 @@ window.Vue.use((vuedraggable__WEBPACK_IMPORTED_MODULE_0___default()));
     // 'clone' the statuses so we don't alter the prop when making changes
     this.statuses = JSON.parse(JSON.stringify(this.initialData));
     this.newStatusOrder = this.statuses[this.statuses.length - 1].order + 1;
-    console.log(this.showDetailModalTask.created_at);
   },
   methods: {
     openAddTaskForm: function openAddTaskForm(statusId) {
@@ -2348,7 +2420,7 @@ window.Vue.use((vuedraggable__WEBPACK_IMPORTED_MODULE_0___default()));
       this.closeAddTaskForm();
     },
     handleTaskMoved: function handleTaskMoved(evt) {
-      axios.put("/tasks/sync", {
+      axios.put("".concat(this.boardId, "/tasks/sync"), {
         columns: this.statuses
       })["catch"](function (err) {
         console.log(err.response);
@@ -2360,7 +2432,7 @@ window.Vue.use((vuedraggable__WEBPACK_IMPORTED_MODULE_0___default()));
       this.statuses.push(newStatus);
     },
     handleStatusMoved: function handleStatusMoved(evt) {
-      axios.put("/statuses/sync", {
+      axios.put("".concat(this.boardId, "/statuses/sync"), {
         columns: this.statuses
       })["catch"](function (err) {
         console.log(err.response);
@@ -2379,7 +2451,6 @@ window.Vue.use((vuedraggable__WEBPACK_IMPORTED_MODULE_0___default()));
         name: 'Jan Ruhfus',
         picture: 'https://i.imgur.com/DY3Th0n.png'
       };
-      console.log(this.showDetailModalTask);
       this.showDetailModal = true;
     }
   }
@@ -2519,6 +2590,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
 window.Vue = vue__WEBPACK_IMPORTED_MODULE_3__.default;
+vue__WEBPACK_IMPORTED_MODULE_3__.default.component("board-overview", __webpack_require__(/*! ./components/BoardOVComponent.vue */ "./resources/js/components/BoardOVComponent.vue").default);
 vue__WEBPACK_IMPORTED_MODULE_3__.default.component("kanban-board", __webpack_require__(/*! ./components/KanbanBoard.vue */ "./resources/js/components/KanbanBoard.vue").default);
 var settings = {
   't-input': {
@@ -57036,6 +57108,45 @@ component.options.__file = "resources/js/components/AddTaskForm.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/BoardOVComponent.vue":
+/*!******************************************************!*\
+  !*** ./resources/js/components/BoardOVComponent.vue ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _BoardOVComponent_vue_vue_type_template_id_634772ca_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BoardOVComponent.vue?vue&type=template&id=634772ca&scoped=true& */ "./resources/js/components/BoardOVComponent.vue?vue&type=template&id=634772ca&scoped=true&");
+/* harmony import */ var _BoardOVComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BoardOVComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/BoardOVComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _BoardOVComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _BoardOVComponent_vue_vue_type_template_id_634772ca_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _BoardOVComponent_vue_vue_type_template_id_634772ca_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "634772ca",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/BoardOVComponent.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/KanbanBoard.vue":
 /*!*************************************************!*\
   !*** ./resources/js/components/KanbanBoard.vue ***!
@@ -57148,6 +57259,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/BoardOVComponent.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/components/BoardOVComponent.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BoardOVComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./BoardOVComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/BoardOVComponent.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BoardOVComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
 /***/ "./resources/js/components/KanbanBoard.vue?vue&type=script&lang=js&":
 /*!**************************************************************************!*\
   !*** ./resources/js/components/KanbanBoard.vue?vue&type=script&lang=js& ***!
@@ -57210,6 +57337,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddTaskForm_vue_vue_type_template_id_23302d8f___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddTaskForm_vue_vue_type_template_id_23302d8f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AddTaskForm.vue?vue&type=template&id=23302d8f& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AddTaskForm.vue?vue&type=template&id=23302d8f&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/BoardOVComponent.vue?vue&type=template&id=634772ca&scoped=true&":
+/*!*************************************************************************************************!*\
+  !*** ./resources/js/components/BoardOVComponent.vue?vue&type=template&id=634772ca&scoped=true& ***!
+  \*************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BoardOVComponent_vue_vue_type_template_id_634772ca_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BoardOVComponent_vue_vue_type_template_id_634772ca_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BoardOVComponent_vue_vue_type_template_id_634772ca_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./BoardOVComponent.vue?vue&type=template&id=634772ca&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/BoardOVComponent.vue?vue&type=template&id=634772ca&scoped=true&");
 
 
 /***/ }),
@@ -57504,6 +57648,127 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/BoardOVComponent.vue?vue&type=template&id=634772ca&scoped=true&":
+/*!****************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/BoardOVComponent.vue?vue&type=template&id=634772ca&scoped=true& ***!
+  \****************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass:
+        "flex flex-col sm:flex-row flex-wrap justify-center items-center py-4 px-12"
+    },
+    _vm._l(this.boards, function(board) {
+      return _c("div", { staticClass: "flex-shrink sm:w-80 mb-6 sm:mr-6" }, [
+        _c("div", { staticClass: "flex flex-col" }, [
+          _c(
+            "a",
+            {
+              staticClass: "no-underline",
+              attrs: { href: /board/ + board.id }
+            },
+            [
+              _c("div", {
+                staticClass: "border-t-8 border-blue-800 rounded-t-lg"
+              }),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "border-b border-l border-r border-grey shadow-md rounded-b-lg p-4"
+                },
+                [
+                  _c("div", { staticClass: "flex" }, [
+                    _vm._m(0, true),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "flex flex-col ml-8 mt-1" }, [
+                      _c("div", { staticClass: "flex-1 text-black" }, [
+                        _vm._v(_vm._s(board.title))
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "flex-1 text-xs text-grey mt-2" },
+                        [_vm._v("@" + _vm._s(board.user.name))]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "flex-1 text-xs text-grey mt-4" },
+                        [
+                          _c("i", { staticClass: "far fa-clock" }),
+                          _vm._v(" "),
+                          _c("format", {
+                            attrs: {
+                              value: board.created_at,
+                              fn: "full_beauty"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "flex-1 text-xs text-grey mt-2" },
+                        [
+                          _c("i", { staticClass: "fas fa-edit" }),
+                          _vm._v(" "),
+                          _c("format", {
+                            attrs: {
+                              value: board.updated_at,
+                              fn: "full_beauty"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ])
+                  ])
+                ]
+              )
+            ]
+          )
+        ])
+      ])
+    }),
+    0
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass:
+          "flex justify-center items-center text-lg border-2 border-pink-light text-pink-light rounded-full w-12 h-12 font-medium"
+      },
+      [_c("i", { staticClass: "fab fa-trello" })]
+    )
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/KanbanBoard.vue?vue&type=template&id=12d93558&scoped=true&":
 /*!***********************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/KanbanBoard.vue?vue&type=template&id=12d93558&scoped=true& ***!
@@ -57614,7 +57879,10 @@ var render = function() {
                               [
                                 _vm.newTaskForStatus === status.id
                                   ? _c("AddTaskForm", {
-                                      attrs: { "status-id": status.id },
+                                      attrs: {
+                                        "status-id": status.id,
+                                        "board-id": status.board_id
+                                      },
                                       on: {
                                         "task-added": _vm.handleTaskAdded,
                                         "task-canceled": _vm.closeAddTaskForm
@@ -57753,7 +58021,10 @@ var render = function() {
                   _vm._v(" "),
                   _c("AddStatusForm", {
                     key: 0,
-                    attrs: { "last-order": this.newStatusOrder },
+                    attrs: {
+                      "last-order": this.newStatusOrder,
+                      "board-id": this.boardId
+                    },
                     on: { "status-added": _vm.handleStatusAdded }
                   })
                 ],

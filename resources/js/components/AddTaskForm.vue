@@ -43,14 +43,16 @@
 <script>
 export default {
     props: {
-        statusId: Number
+        statusId: Number,
+        boardId: Number
     },
     data() {
         return {
             newTask: {
                 title: "",
                 description: "",
-                status_id: null
+                status_id: null,
+                board_id: this.boardId
             },
             errorMessage: ""
         };
@@ -68,7 +70,7 @@ export default {
 
             // Send new task to server
             axios
-                .post("/tasks", this.newTask)
+                .post(`${this.boardId}/tasks`, this.newTask)
                 .then(res => {
                     // Tell the parent component we've added a new task and include it
                     this.$emit("task-added", res.data);

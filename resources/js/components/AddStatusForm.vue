@@ -26,13 +26,15 @@
 <script>
 export default {
     props: {
-        lastOrder: Number
+        lastOrder: Number,
+        boardId: Number
     },
     data() {
         return {
             newStatus: {
                 title: "",
                 order: 0,
+                board_id: this.boardId
             },
             errorMessage: ""
         };
@@ -48,7 +50,7 @@ export default {
             this.newStatus.order = this.lastOrder;
 
             axios
-                .post("/statuses", this.newStatus)
+                .post(`${this.boardId}/statuses`, this.newStatus)
                 .then(res => {
                     // Tell the parent component we've added a new task and include it
                     this.$emit("status-added", res.data);

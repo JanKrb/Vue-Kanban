@@ -11,8 +11,9 @@ class Status extends Model
 
     protected $fillable = [
         'title',
-        'slug',
-        'order'
+        'order',
+        'board_id',
+        'user_id'
     ];
 
     public $timestamps = false;
@@ -20,6 +21,10 @@ class Status extends Model
     public function tasks()
     {
         return $this->hasMany(Task::class)->orderBy('order');
+    }
+
+    public function board() {
+        return $this->belongsTo(Board::class);
     }
 
     public function user()

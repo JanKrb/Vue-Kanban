@@ -36,6 +36,7 @@
                                 <AddTaskForm
                                     v-if="newTaskForStatus === status.id"
                                     :status-id="status.id"
+                                    :board-id="status.board_id"
                                     v-on:task-added="handleTaskAdded"
                                     v-on:task-canceled="closeAddTaskForm"
                                 />
@@ -88,7 +89,7 @@
                     </div>
 
                     <!-- AddStatusForm -->
-                    <AddStatusForm v-on:status-added="handleStatusAdded" :key="0" :last-order="this.newStatusOrder"></AddStatusForm>
+                    <AddStatusForm v-on:status-added="handleStatusAdded" :key="0" :last-order="this.newStatusOrder" :board-id="this.boardId"></AddStatusForm>
                     <!-- ./AddStatusForm -->
                 </transition-group>
             </draggable>
@@ -220,7 +221,8 @@ window.Vue.use(draggable);
 export default {
     components: { draggable, AddTaskForm, AddStatusForm, ModalComponent },
     props: {
-        initialData: Array
+        initialData: Array,
+        boardId: Number
     },
     data() {
         return {
@@ -271,8 +273,6 @@ export default {
         // 'clone' the statuses so we don't alter the prop when making changes
         this.statuses = JSON.parse(JSON.stringify(this.initialData));
         this.newStatusOrder = this.statuses[this.statuses.length - 1].order + 1;
-
-        console.log(this.showDetailModalTask.created_at)
     },
     methods: {
         openAddTaskForm(statusId) {
@@ -294,7 +294,7 @@ export default {
             this.closeAddTaskForm();
         },
         handleTaskMoved(evt) {
-            axios.put("/tasks/sync", { columns: this.statuses }).catch(err => {
+            axios.put(`${this.boardId}/tasks/sync`, { columns: this.statuses }).catch(err => {
                 console.log(err.response);
             });
         },
@@ -304,7 +304,7 @@ export default {
             this.statuses.push(newStatus);
         },
         handleStatusMoved(evt) {
-            axios.put("/statuses/sync", { columns: this.statuses }).catch(err => {
+            axios.put(`${this.boardId}/statuses/sync`, { columns: this.statuses }).catch(err => {
                 console.log(err.response);
             });
         },
@@ -322,7 +322,6 @@ export default {
                 picture: 'https://i.imgur.com/DY3Th0n.png'
             }
 
-            console.log(this.showDetailModalTask)
             this.showDetailModal = true;
         }
     }

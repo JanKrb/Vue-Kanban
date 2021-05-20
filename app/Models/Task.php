@@ -13,7 +13,8 @@ class Task extends Model
         'title',
         'description',
         'order',
-        'status_id'
+        'status_id',
+        'user_id'
     ];
 
     public function user()
@@ -24,5 +25,9 @@ class Task extends Model
     public function status()
     {
         return $this->belongsTo(Status::class);
+    }
+
+    public function board() {
+        return $this->belongsTo(Board::class);
     }
 }

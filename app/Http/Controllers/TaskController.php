@@ -6,24 +6,20 @@ use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
-    public function index()
+    public function index($board_id)
     {
         $tasks = auth()->user()->statuses()->with('tasks')->get();
 
-        return view('tasks.index', compact('tasks'));
+        return view('tasks.index', compact('tasks', 'board_id'));
     }
 
-    public function create()
-    {
-        //
-    }
-
-    public function store(Request $request)
+    public function store(Request $request, $board_id)
     {
         $this->validate($request, [
             'title' => ['required', 'string', 'max:56'],
             'description' => ['nullable', 'string'],
-            'status_id' => ['required', 'exists:statuses,id']
+            'status_id' => ['required', 'exists:statuses,id'],
+            'board_id' => ['required', 'integer']
         ]);
 
         return $request->user()
@@ -31,7 +27,7 @@ class TaskController extends Controller
             ->create($request->only('title', 'description', 'status_id'));
     }
 
-    public function sync(Request $request)
+    public function sync(Request $request, $board_id)
     {
         $this->validate(request(), [
             'columns' => ['required', 'array']
@@ -51,22 +47,7 @@ class TaskController extends Controller
         return $request->user()->statuses()->with('tasks')->get();
     }
 
-    public function show(Task $task)
-    {
-        //
-    }
-
-    public function edit(Task $task)
-    {
-        //
-    }
-
     public function update(Request $request, Task $task)
-    {
-        //
-    }
-
-    public function destroy(Task $task)
     {
         //
     }

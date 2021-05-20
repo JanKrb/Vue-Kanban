@@ -41,9 +41,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function boards() {
+        return $this->hasMany(Board::class)->orderBy('order');
+    }
+
     public function tasks()
     {
-        return $this->hasMany(Task::class);
+        return $this->hasMany(Task::class)->orderBy('order');
     }
 
     public function statuses()
@@ -55,23 +59,10 @@ class User extends Authenticatable
     {
         static::created(function ($user) {
             // Create default statuses
-            $user->statuses()->createMany([
-                [
-                    'title' => 'Backlog',
-                    'order' => 1
-                ],
-                [
-                    'title' => 'Up Next',
-                    'order' => 2
-                ],
-                [
-                    'title' => 'In Progress',
-                    'order' => 3
-                ],
-                [
-                    'title' => 'Done',
-                    'order' => 4
-                ]
+            $user->boards()->create([
+                'title' => 'Welcome to Kanban',
+                'order' => 0,
+                'user_id' => $user->id
             ]);
         });
     }

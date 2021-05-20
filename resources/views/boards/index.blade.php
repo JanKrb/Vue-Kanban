@@ -3,7 +3,7 @@
 @section('content')
     <div class="md:mx-4 relative overflow-hidden">
         <main class="h-full flex flex-col overflow-auto">
-            <kanban-board :initial-data="{{ $tasks }}" :board-id="{{ $board_id }}"></kanban-board>
+            <board-overview :initial-data="{{ $boards }}"></board-overview>
         </main>
     </div>
 @endsection
