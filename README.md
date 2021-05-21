@@ -1,6 +1,8 @@
 # Laravel Vue Kanban Board
 This kanban board is based on [laravel framework](https://laravel.com/) in the backend and the [Vue.js framework](https://vuejs.org/) in the frontend with the [tailwind style library](https://tailwindcss.com/).
 
+It's not finished yet, I'm planing to add some utilities like archiving or sharing board's and card's. It will follow in further commits.
+
 ## Credits
 This is a reworked and extended version of [messerli90's  laravel-vue-kanban-tutorial](https://github.com/messerli90/laravel-vue-kanban-tutorial). 
 
