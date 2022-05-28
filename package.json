@@ -30,7 +30,7 @@
         "@tailwindcss/forms": "^0.3.2",
         "@tailwindcss/typography": "^0.4.0",
         "font-awesome": "^4.7.0",
-        "moment": "^2.29.1",
+        "moment": "^2.29.2",
         "vue": "^2.6.12",
         "vue-tailwind": "^2.2.1",
         "vuedraggable": "^2.23.2"
